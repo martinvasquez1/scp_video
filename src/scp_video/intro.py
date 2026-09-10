@@ -11,9 +11,9 @@ class Intro(Scene):
 
     def create_names(self):
         names = VGroup(
-            Text("Name 1", font_size=24),
-            Text("Name 2", font_size=24),
-            Text("Name 3", font_size=24),
+            Text("Alex Andrés Lazcano Villar", font_size=24),
+            Text("Matías Benjamín Carrasco Muñoz", font_size=24),
+            Text("Martín Jesús Vásquez Medel", font_size=24),
         )
         names.arrange(DOWN, buff=0.2)
         names.to_edge(DOWN, buff=1.2)
