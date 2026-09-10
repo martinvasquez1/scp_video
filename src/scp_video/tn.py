@@ -18,35 +18,27 @@ class TN(Scene):
         recurrence = MathTex(r"2T(n-1) + k_2")
         return recurrence
 
-    def do_replacement(self, replacement_arr, sustitution_arr):
-        # Replace
-        replacement_1_1 = MathTex(r"T(n-1) = 2T(n-1-1) + k2")
-        replacement_1_2 = MathTex(r"T(n-1) = 2T(n-2) + k2")
+    def show_equation(self, equations):
+        texts = [MathTex(equation) for equation in equations]
 
-        self.play(FadeIn(replacement_1_1))
+        for i, text in enumerate(texts):
+            if i > 0:
+                text.next_to(texts[i - 1], DOWN)
+
+            self.play(FadeIn(text))
+
+        return VGroup(*texts)
+
+    def do_replacement(self, replacements, sustitutions):
+        replacements_group = self.show_equation(replacements)
+        self.play(replacements_group.animate.shift(UP * 2))
+
+        sustitutions_group = self.show_equation(sustitutions)
         self.wait(self.display_time * 2)
 
-        replacement_1_2.next_to(replacement_1_1, DOWN)
-        self.play(FadeIn(replacement_1_2))
-
-        replacements_1 = VGroup(replacement_1_1, replacement_1_2)
-        self.play(replacements_1.animate.shift(UP*2))
-
-        # Sus
-        sustitution_1_1 = MathTex(r"T(n) = 2(2T(n-2) +k2) + k2")
-        sustitution_1_2 = MathTex(r"T(n) = 4T(n-2) + 2k + k2")
-        sustitution_1_3 = MathTex(r"T(n) = 4T(n-2) + 3k")
-
-        self.play(FadeIn(sustitution_1_1))
-        self.wait(self.display_time * 2)
-
-        sustitution_1_2.next_to(sustitution_1_1, DOWN)
-        self.play(FadeIn(sustitution_1_2))
-
-        sustitution_1_3.next_to(sustitution_1_2, DOWN)
-        self.play(FadeIn(sustitution_1_3))
-
-        self.wait(self.display_time * 2)
+        groups = VGroup(replacements_group, sustitutions_group)
+        self.play(FadeOut(groups))
+        self.wait(self.display_time)
 
     def construct(self):
         # Def
@@ -59,7 +51,7 @@ class TN(Scene):
         recurrence = self.create_recurrence()
         rectangle = SurroundingRectangle(recurrence)
 
-        # Rec
+        # Recurrence 
         self.play(FadeIn(recurrence))
         self.play(Create(rectangle))
 
@@ -68,6 +60,26 @@ class TN(Scene):
             rectangle.animate.to_edge(UP, buff=0.4),
         )
 
-        a = ["12321", "111", "222"]
-        b = ["999", "1111111111", "777"]
-        self.do_replacement(a, b)
+        self.do_replacement(
+            [
+                r"T(n-1) = 2T(n-1-1) + k_2",
+                r"T(n-1) = 2T(n-2) + k_2",
+            ],
+            [
+                r"T(n) = 2(2T(n-2) +k_2) + k_2",
+                r"T(n) = 4T(n-2) + 2k_2 + k_2",
+                r"T(n) = 4T(n-2) + 3k_2",
+            ],
+        )
+
+        self.do_replacement(
+            [
+                r"T(n-2) = 2T(n-1-2) + k_2",
+                r"T(n-2) = 2T(n-3) + k_2",
+            ],
+            [
+                r"T(n) = 4(2T(n-3) + k_2) + 3k_2",
+                r"T(n) = 8T(n-3) + 4k_2) + 3k_2",
+                r"T(n) = 8T(n-3) + 7k_2",
+            ],
+        )
