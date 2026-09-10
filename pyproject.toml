@@ -7,7 +7,9 @@ authors = [
     { name = "Martin Vasquez", email = "159503418+martinvasquez1@users.noreply.github.com" }
 ]
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "manim>=0.21.0",
+]
 
 [project.scripts]
 scp-video = "scp_video:main"
