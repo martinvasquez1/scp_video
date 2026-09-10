@@ -1,5 +1,7 @@
 from manim import *
 
+from utils.equations import show_vertical_equations
+
 class TN(Scene):
     display_time = 0.3
 
@@ -17,28 +19,6 @@ class TN(Scene):
     def create_recurrence(self):
         recurrence = MathTex(r"2T(n-1) + k_2")
         return recurrence
-
-    def show_equation(self, equations):
-        texts = [MathTex(equation) for equation in equations]
-
-        for i, text in enumerate(texts):
-            if i > 0:
-                text.next_to(texts[i - 1], DOWN)
-
-            self.play(FadeIn(text))
-
-        return VGroup(*texts)
-
-    def do_replacement(self, replacements, sustitutions):
-        replacements_group = self.show_equation(replacements)
-        self.play(replacements_group.animate.shift(UP * 2))
-
-        sustitutions_group = self.show_equation(sustitutions)
-        self.wait(self.display_time * 2)
-
-        groups = VGroup(replacements_group, sustitutions_group)
-        self.play(FadeOut(groups))
-        self.wait(self.display_time)
 
     def construct(self):
         # Def
@@ -60,7 +40,8 @@ class TN(Scene):
             rectangle.animate.to_edge(UP, buff=0.4),
         )
 
-        self.do_replacement(
+        show_vertical_equations(
+            self,
             [
                 r"T(n-1) = 2T(n-1-1) + k_2",
                 r"T(n-1) = 2T(n-2) + k_2",
@@ -72,7 +53,8 @@ class TN(Scene):
             ],
         )
 
-        self.do_replacement(
+        show_vertical_equations(
+            self,
             [
                 r"T(n-2) = 2T(n-1-2) + k_2",
                 r"T(n-2) = 2T(n-3) + k_2",
@@ -84,7 +66,8 @@ class TN(Scene):
             ],
         )
 
-        self.do_replacement(
+        show_vertical_equations(
+            self,
             [
                 r"T(n-2) = 2T(n-1-2) + k_2",
                 r"T(n-2) = 2T(n-3) + k_2",
