@@ -11,3 +11,4 @@ class Pseudocode(Scene):
         pseudocode.to_corner(UL)
         self.play(Create(pseudocode))
         self.wait(2)
+        self.play(FadeOut(pseudocode))

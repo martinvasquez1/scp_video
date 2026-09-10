@@ -35,3 +35,11 @@ class TNSolution(Scene):
         )
 
         self.wait(2)
+
+        self.play(
+            FadeOut(
+                pattern,
+                solve_i,
+                solution
+            )
+        )

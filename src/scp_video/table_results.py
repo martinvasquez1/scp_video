@@ -62,3 +62,5 @@ class TableResults(Scene):
         self.play(n_column.animate.set_color(YELLOW))
 
         self.wait(2)
+
+        self.play(FadeOut(table))

@@ -78,3 +78,5 @@ class TN(Scene):
                 r"T(n) = 8T(n-3) + 7k_2",
             ],
         )
+
+        self.play(FadeOut(recurrence, rectangle))

@@ -81,3 +81,13 @@ class Context(Scene):
 
         subset_4.move_to(numbers[4])
         self.play(Create(subset_4))
+
+        everything = VGroup(
+            description,
+            numbers,
+            subset_1,
+            subset_2,
+            subset_3,
+            subset_4,
+        )
+        self.play(FadeOut(everything))

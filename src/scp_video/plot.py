@@ -47,3 +47,11 @@ class Plot(Scene):
 
         self.wait(2)
         
+        self.play(
+            FadeOut(
+                graph,
+                axes,
+                x_label,
+                y_label,
+            )
+        )
