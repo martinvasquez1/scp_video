@@ -1,0 +1,6 @@
+function solve(n, k):
+    if n == 1:
+        return base_case
+
+    for location in candidates:
+        solve(n - 1, k)
