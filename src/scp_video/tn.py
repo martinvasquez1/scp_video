@@ -83,3 +83,15 @@ class TN(Scene):
                 r"T(n) = 8T(n-3) + 7k_2",
             ],
         )
+
+        self.do_replacement(
+            [
+                r"T(n-2) = 2T(n-1-2) + k_2",
+                r"T(n-2) = 2T(n-3) + k_2",
+            ],
+            [
+                r"T(n) = 4(2T(n-3) + k_2) + 3k_2",
+                r"T(n) = 8T(n-3) + 4k_2) + 3k_2",
+                r"T(n) = 8T(n-3) + 7k_2",
+            ],
+        )
